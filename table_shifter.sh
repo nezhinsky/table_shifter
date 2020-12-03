@@ -18,8 +18,8 @@ done
 while IFS=' ' read -r line
 do
   arr=($line)
-  if [[ ${arr[0]} == $3 ]];
+  if [[ ${arr[$pos1]} == $3 ]];
   then
-  echo "$2 for $3 is ${arr[$pos1]}"
-fi
+  echo "${arr[@]}"
+  fi
 done < $1
