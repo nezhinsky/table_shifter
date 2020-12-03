@@ -6,7 +6,7 @@ for col in $HEADER;
 do
 if [ $col = $2 ]
 then
-pos1=$arr_pos
+pos1="$arr_pos"
 break
 else
 ((arr_pos++))
