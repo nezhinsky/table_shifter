@@ -1,0 +1,5 @@
+firstname lastname city zip 
+Boy George Toronto 444333
+John Black London 123456
+Mama Cas Las_vegas 987987
+David White NY 654321

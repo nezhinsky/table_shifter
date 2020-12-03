@@ -1,0 +1,5 @@
+firstname lastname city zip
+Danny Din Toronto 444333
+Harry Potter London 123456
+Ron Wisley Las_vegas 987987
+Uri Geller NY 654321
