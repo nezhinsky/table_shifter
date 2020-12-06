@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 
+if [[ $# < 3 ]]; then
+    echo "not enough args"
+    exit 1
+fi
+
 if [ -z "$2" ]; then
    echo "Please enter colume"
    else
@@ -31,7 +36,7 @@ if [ -z "$3" ]; then
    while IFS=' ' read -r line
    do
    arr=($line)
-   if [[ ${arr[$pos1]} =~ $3 ]]
+   if [[ ${arr[$pos1]} =~ K$3 ]]
    then
    echo "${arr[@]}"
    fi
