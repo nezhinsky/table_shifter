@@ -1,7 +1,12 @@
 #!/usr/bin/bash
 
+err_msg () {
+echo "Insufficient arguments"
+}
+
+
 if [[ $# < 3 ]]; then 
-  echo "insuffianct Args"
+  err_msg
   exit 1
 fi
 
@@ -10,7 +15,7 @@ readarray -t HEADER <$1
 arr_pos=0
 for col in $HEADER;
 do
-if [ $col = $2 ]
+if [[ $col =~ $2 ]]
 then
 pos1="$arr_pos"
 break
