@@ -19,7 +19,7 @@ done
 while IFS=' ' read -r line
 do
   arr=($line)
-  if [[ ${arr[$pos1]} == $3 ]];
+  if [[ ${arr[$pos1]} =~ $3 ]]
   then
   echo "${arr[@]}"
   fi
