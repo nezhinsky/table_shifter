@@ -46,11 +46,11 @@ if [ $(cat /tmp/t1.txt | grep -v Bo | wc -l) != "0" ]; then
 fi
 rm /tmp/t1.txt
 
-# test 5
+# test 5 - column $2 misspelled 
 
 ./table_shifter.sh ./names/names.txt ci Boy > /tmp/t1.txt
 if [ $(cat /tmp/t1.txt | grep Boy | wc -l) != "0" ]; then
-    echo "./names/names.txt ci Boy - failed, ci can't pass as anything but 'city' "
+    echo "./names/names.txt ci Boy - failed, ci can't pass as 'city' "
     exit 1
 fi
 
@@ -65,7 +65,7 @@ if [ $(cat /tmp/t1.txt | grep Tel-Aviv | wc -l) != "0" ]; then
 fi
 
 
-# test 7
+# test 7 - substring shared by 2 values
 ./table_shifter.sh ./names/names.txt city on > /tmp/t1.txt
 if [ $(cat /tmp/t1.txt | grep on | wc -l) != "2" ]; then
     echo "./names/names.txt city on - failed, should present 2 lines"
