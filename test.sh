@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # test1
-./table_shifter.sh ./names/names.txt city London > /tmp/t1.txt
+./table_shifter.sh ./names/names.txt city London > /tmp/t1.txt || echo fail
 if [ $(cat /tmp/t1.txt | grep London | wc -l) != "1" ]; then
     echo "./names/names.txt city London - failed, no London"
     exit 1
@@ -14,7 +14,7 @@ rm /tmp/t1.txt
 
 # test2
 
-./table_shifter.sh ./names/names.txt city ndon > /tmp/t1.txt
+./table_shifter.sh ./names/names.txt city ndon > /tmp/t1.txt || echo fail
 if [ $(cat /tmp/t1.txt | grep London | wc -l) != "1" ]; then
     echo "./names/names.txt city London - failed, no London"
     exit 1
@@ -27,15 +27,15 @@ rm /tmp/t1.txt
 
 # test3 - check minimum arguments
 
-./table_shifter.sh ./names/names.txt city > /tmp/t1.txt
-if [[ ! $(cat /tmp/t1.txt) =~ "insuffianct" ]]; then
+./table_shifter.sh names/names.txt city > /tmp/t1.txt && echo failed test3
+if [[  $(cat /tmp/t1.txt) =~ "ERROR" ]]; then
   echo "args condition not succsesful"
-
+  
 fi
 
-# test 4 
+# test 4 - column $3 misspeled
 
-./table_shifter.sh ./names/names.txt firstname Bo > /tmp/t1.txt
+./table_shifter.sh ./names/names.txt firstname Bo > /tmp/t1.txt || echo failed test4
 if [ $(cat /tmp/t1.txt | grep Bo | wc -l) != "1" ]; then
     echo "./names/names.txt firstname Bo - failed, no Boy"
     exit 1
@@ -48,9 +48,9 @@ rm /tmp/t1.txt
 
 # test 5 - column $2 misspelled 
 
-./table_shifter.sh ./names/names.txt ci NY > /tmp/t1.txt
-if [ $(cat /tmp/t1.txt | grep Boy | wc -l) != "0" ]; then
-    echo "./names/names.txt ci Boy - failed, ci can't pass as 'city' "
+./table_shifter.sh names/names.txt ci NY > /tmp/t1.txt && echo failed test5
+if [ $(cat /tmp/t1.txt | grep NY | wc -l) != "0" ]; then
+    echo "names/names.txt ci Boy - failed, ci can't pass as 'city' "
     exit 1
 fi
 
@@ -58,15 +58,15 @@ rm /tmp/t1.txt
 
 # test 6 - city not in list
 
-./table_shifter.sh ./names/names.txt city Tel-Aviv > /tmp/t1.txt
+./table_shifter.sh names/names.txt city Tel-Aviv > /tmp/t1.txt || echo failed test6
 if [ $(cat /tmp/t1.txt | grep Tel-Aviv | wc -l) != "0" ]; then
-    echo "./table_shifter.sh ./names/names.txt city Tel-Aviv - failed, Tel-Aviv is not in the list."
+    echo "./table_shifter.sh names/names.txt city Tel-Aviv - failed, Tel-Aviv is not in the list."
     exit 1
 fi
 
 
 # test 7 - substring shared by 2 values
-./table_shifter.sh ./names/names.txt city on > /tmp/t1.txt
+./table_shifter.sh names/names.txt city on > /tmp/t1.txt || echo failed test7
 if [ $(cat /tmp/t1.txt | grep on | wc -l) != "2" ]; then
     echo "./names/names.txt city on - failed, should present 2 lines"
     exit 1
@@ -75,7 +75,8 @@ fi
 rm /tmp/t1.txt
 
 # test 8 - checks if names.txt exists
-if [ ! -e names/names.txt ] && [ ! -e names/names2.txt ]; then
+if [ ! -e names/names.txt ] && [ ! -e names/names2.txt ]; 
+    then
     echo "text files missing"
     exit 1
 fi
