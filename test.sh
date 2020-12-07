@@ -28,7 +28,7 @@ rm /tmp/t1.txt
 # test3 - check minimum arguments
 
 ./table_shifter.sh ./names/names.txt city > /tmp/t1.txt
-if [[ ! $(cat /tmp/t1.txt) =~ "Insufficien" ]]; then
+if [[ ! $(cat /tmp/t1.txt) =~ "insuffianct" ]]; then
   echo "args condition not succsesful"
 
 fi
@@ -48,7 +48,7 @@ rm /tmp/t1.txt
 
 # test 5 - column $2 misspelled 
 
-./table_shifter.sh ./names/names.txt ci Boy > /tmp/t1.txt
+./table_shifter.sh ./names/names.txt ci NY > /tmp/t1.txt
 if [ $(cat /tmp/t1.txt | grep Boy | wc -l) != "0" ]; then
     echo "./names/names.txt ci Boy - failed, ci can't pass as 'city' "
     exit 1
@@ -73,3 +73,10 @@ if [ $(cat /tmp/t1.txt | grep on | wc -l) != "2" ]; then
 fi
 
 rm /tmp/t1.txt
+
+# test 8 - checks if names.txt exists
+if [ ! -e names/names.txt ] && [ ! -e names/names2.txt ]; then
+    echo "text files missing"
+    exit 1
+fi
+
