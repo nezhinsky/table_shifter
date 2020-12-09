@@ -11,6 +11,14 @@ if [[ $# < 3 ]]; then
   exit 1
 fi
 
+# check if file name enterd correctly 
+if [ ! -f $1 ]; then
+    echo "invalid file name"
+    usage
+    exit 1
+fi
+
+
 readarray -n 1 -t HEADER <$1
 #for loop to enumarte the selected colume on $2
 arr_pos=0
