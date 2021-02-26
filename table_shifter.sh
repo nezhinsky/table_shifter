@@ -20,7 +20,7 @@ fi
 
 
 readarray -n 1 -t HEADER <$1
-#for loop to enumarte the selected colume on $2
+#for loop to enumerate the selected column on $2
 arr_pos=0
 for col in $HEADER;
   do
@@ -40,7 +40,7 @@ if [ -z $pos1 ];
 fi
 #echo $pos1
 #---------------------------------------------
-#itirates through the file and if third conditon is met the #prints the requested line and colum
+#iterates through the file and if third conditon is met the #prints the requested line and colum
 
 while IFS=' ' read -r line
 do
